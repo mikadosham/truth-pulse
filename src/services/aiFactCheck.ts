@@ -11,11 +11,11 @@ export async function analyzeClaim(input: string): Promise<{
 }> {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "user",
-          content: `Fact-check the following statement: "${input}". Provide results in the following format:
+          content: `Fact-check the following statement (which may need spell checking first): "${input}". Provide results in the following format:
   {
     "verdict": "true/false/neither",
     "explanation": "Detailed explanation",

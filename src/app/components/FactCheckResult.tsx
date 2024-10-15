@@ -56,7 +56,7 @@ const FactCheckResult: React.FC<FactCheckResultProps> = ({
   return (
     <div>
       <h2 className="flash">
-        Fact-Check Verdict: {verdict === "true" ? "True ✔️" : "False ✘"}
+        Verdict: {verdict === "true" ? "True ✔️" : "False ✘"}
       </h2>
       <p ref={explanationRef}>{/* This will be typed out via the effect */}</p>
 
