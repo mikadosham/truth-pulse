@@ -13,10 +13,60 @@ const InputForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  function typeEffect(element: any, text: string, speed = 50) {
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+    element.innerHTML = ""; // Clear any previous content
+    typeWriter();
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
+    setResult(null);
+
+    const inputValue = (document.getElementById("input") as HTMLInputElement)
+      .value;
+    console.log(inputValue);
+    // Validation function
+    const validateInput = (input: string) => {
+      // Check if input is a valid URL
+      try {
+        new URL(input);
+        return true; // Valid URL
+      } catch {}
+
+      // Check if input has three or more words
+      const words = input.trim().split(/\s+/);
+      if (words.length >= 3) {
+        return true;
+      }
+
+      return false; // Invalid input
+    };
+
+    // Perform validation
+    if (!validateInput(inputValue)) {
+      setError(null);
+      // Use typing effect to display error message
+      const formErrorElement = document.querySelector(".form-error");
+      if (formErrorElement) {
+        typeEffect(
+          formErrorElement,
+          "Input needs to be three or more words or a valid URL."
+        );
+      }
+      setError("Input needs to be three or more words or a valid URL.");
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch("/api/fact-check", {
@@ -30,7 +80,6 @@ const InputForm: React.FC = () => {
       const data = await response.json();
 
       if (response.ok && data.verdict && data.explanation) {
-        // Make sure the expected fields are present
         setResult({
           verdict: data.verdict,
           explanation: data.explanation,
@@ -65,9 +114,34 @@ const InputForm: React.FC = () => {
           </label>
         </div>
 
-        <button className="styled-button" type="submit" disabled={loading}>
-          {loading ? "Checking..." : "Check"}
+        <button
+          className={loading ? "hidden" : "styled-button"}
+          type="submit"
+          disabled={loading}
+        >
+          Check
         </button>
+
+        <div className={loading ? "monitor visible" : "monitor hidden"}>
+          <svg
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 500 200"
+            xmlSpace="preserve"
+          >
+            <g>
+              <polyline
+                className="ekg"
+                points="486.6,113.8 328.2,113.8 310.3,132.3 296,70.7 246.8,127.4 241.6,120.2 233.9,166.4 227,27.6 
+              213.2,118.3 211.8,112.3 205.1,126.1 198.2,108.5 194.1,124.4 184.5,92.9 174.1,113 4.3,113"
+              />
+            </g>
+          </svg>
+        </div>
       </form>
 
       {/* Display the result using the new FactCheckResult component */}
@@ -79,7 +153,7 @@ const InputForm: React.FC = () => {
         />
       )}
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <p className={`form-error ${error ? "" : "hidden"}`}></p>
     </div>
   );
 };
