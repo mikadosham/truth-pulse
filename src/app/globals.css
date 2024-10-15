@@ -1,42 +1,198 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "VT323", monospace;
+
+  font-style: normal;
+
+  background-color: #000000;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+main {
+  text-align: center;
+}
+a,
+a:visited,
+a:active,
+h1,
+h2,
+h3,
+p {
+  color: #00d704;
+  text-decoration: none;
+  font-family: "VT323", monospace;
+  font-size: 25px;
+  font-style: normal;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  font-variant: small-caps;
+  font-family: "VT323", monospace;
+
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+a:hover,
+a:focus {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.intro-block {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.intro-block .monitor {
+  padding: 0;
+  max-width: 200px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.intro-block svg {
+  max-width: 470px;
+  margin-left: 20px;
+  margin-right: 20px;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+
+.intro-block svg .ekg {
+  fill: none;
+  stroke: #00d704;
+  stroke-width: 10px;
+  stroke-linecap: round;
+  stroke-linejoin: miter;
+  opacity: 0;
+  stroke-dashoffset: 1000;
+  stroke-dasharray: 1000;
+  animation: ekg 1.5s linear forwards infinite;
+}
+
+.intro-block h1,
+.intro-block h3,
+.intro-block p {
+  width: 450px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.intro-block p {
+  width: 450px;
+  margin: 0 auto;
+}
+
+@keyframes ekg {
+  0% {
+    opacity: 0;
   }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    stroke-dashoffset: 2000;
+  }
+  99% {
+    opacity: 0;
+    stroke-dashoffset: 3000;
+  }
+  100% {
+    stroke-dashoffset: 1000;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.styled-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: black;
+  color: #00ff00;
+  font-family: "VT323", monospace;
+  font-style: normal;
+  font-size: 20px;
+  border-bottom: 2px solid #00ff00;
+  outline: none;
+  text-align: center;
+}
+
+.styled-input::placeholder {
+  color: transparent;
+}
+
+.styled-input:focus {
+  outline: none;
+  border-bottom-color: #00ff00;
+}
+
+.floating-label {
+  position: absolute;
+  top: 10px;
+  font-family: "VT323", monospace;
+  font-size: 23px;
+  font-style: normal;
+  left: 10px;
+  width: 100%;
+  color: #00ff00;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.styled-input:focus + .floating-label,
+.styled-input:not(:placeholder-shown) + .floating-label {
+  top: -20px;
+  left: 10px;
+  font-size: 15px;
+  color: #00ff00;
+}
+
+.form-wrapper {
+  margin-top: 40px;
+}
+
+.styled-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: black;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  font-family: "VT323", monospace;
+  font-style: normal;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.styled-button:hover {
+  background-color: #00ff00;
+  color: black;
+}
+
+.styled-button:focus {
+  outline: none;
+  background-color: #00ff00;
+  color: black;
+}
+
+.styled-button:active {
+  background-color: black;
+  color: #00ff00;
+  border-color: #00ff00;
+}
+
+ul {
+  padding-inline-start: 0px;
 }
