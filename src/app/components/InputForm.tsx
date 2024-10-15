@@ -56,9 +56,11 @@ const InputForm: React.FC = () => {
     if (!validateInput(inputValue)) {
       setError(null);
       // Use typing effect to display error message
+
       const formErrorElement = document.querySelector(
         ".form-error"
-      ) as HTMLElement;
+      ) as HTMLElement | null;
+
       if (formErrorElement) {
         typeEffect(
           formErrorElement,
@@ -155,7 +157,7 @@ const InputForm: React.FC = () => {
         />
       )}
 
-      <p className={`form-error ${error ? "" : "hidden"}`}></p>
+      <p className={`form-error ${error ? "visible" : "hidden"}`}></p>
     </div>
   );
 };

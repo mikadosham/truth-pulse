@@ -44,6 +44,9 @@ h2 {
   font-size: 40px;
 }
 
+h3 {
+  text-decoration-line: underline;
+}
 strong {
   font-weight: bold;
 }

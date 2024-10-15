@@ -60,7 +60,7 @@ const FactCheckResult: React.FC<FactCheckResultProps> = ({
       </h2>
       <p ref={explanationRef}>{/* This will be typed out via the effect */}</p>
 
-      <h3>Sources:</h3>
+      <h3>Sources</h3>
       <ul>
         {sources.length > 0 ? (
           sources.map((source, index) => (
