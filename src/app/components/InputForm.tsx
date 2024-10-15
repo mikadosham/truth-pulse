@@ -56,7 +56,9 @@ const InputForm: React.FC = () => {
     if (!validateInput(inputValue)) {
       setError(null);
       // Use typing effect to display error message
-      const formErrorElement = document.querySelector(".form-error");
+      const formErrorElement = document.querySelector(
+        ".form-error"
+      ) as HTMLElement;
       if (formErrorElement) {
         typeEffect(
           formErrorElement,
