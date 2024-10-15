@@ -13,7 +13,7 @@ const InputForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  function typeEffect(element: any, text: string, speed = 50) {
+  function typeEffect(element: HTMLElement, text: string, speed = 50) {
     let i = 0;
     function typeWriter() {
       if (i < text.length) {

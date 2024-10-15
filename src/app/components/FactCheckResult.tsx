@@ -22,7 +22,7 @@ const FactCheckResult: React.FC<FactCheckResultProps> = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null); // To track and clear timeout
 
   // Typing effect
-  function typeEffect(element: any, text: string, speed = 50) {
+  function typeEffect(element: HTMLElement, text: string, speed = 50) {
     let i = 0;
     if (element) {
       element.innerHTML = ""; // Clear content before starting
